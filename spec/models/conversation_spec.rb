@@ -34,6 +34,18 @@ describe Conversation do
     conversation.errors.on(:name).should == "Please give this conversation a title."
   end
   
+  
+  it "becomes full conversation if simple and then given a name after the fact" do
+    conversation = Factory.build(:conversation, :name => "", :simple => true)
+    conversation.save.should be_true
+    conversation.name.should be_nil
+    conversation.simple.should be_true
+    conversation.name = 'New Conversation'
+    conversation.save.should be_true
+    conversation.simple.should be_false
+    
+  end
+  
   it "allows blank name if simple" do
     conversation = Factory.build(:conversation, :name => "", :simple => true)
     conversation.save.should be_true
