@@ -5,11 +5,11 @@
 # Configuration shared between all environments:
 defaults: &defaults
   # The domain from where your app is served
-  app_domain: localhost
+  app_domain: osbdetails.heroku.com
 
   # How many activities should activity feeds display?
   activities_per_page: 25
-  autorefresh_interval: 60 # in seconds
+  autorefresh_interval: 30 # in seconds
 
   # Hour of the day at which daily reminders will be sent
   daily_task_reminder_email_time: 6
