@@ -75,7 +75,7 @@ module Teambox
       if %w[test cucumber].include? RAILS_ENV
         self.community = false
       elsif self.community.nil?
-        self.community = true
+        self.community = false
       end
 
       self.amazon_s3 = true if heroku?
