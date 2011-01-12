@@ -695,7 +695,7 @@ en:
     filter_project:
       all: "All projects"
     filter_organization:
-      all: "All organizations"
+      all: "All clients"
 
   tasks:
     my_tasks_listing:
