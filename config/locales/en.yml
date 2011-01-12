@@ -453,15 +453,17 @@ en:
       admin_users: Manage users
       admin_projects: Manage projects
       billing: Plans and Billing
-      delete: Delete this organization...
+      delete: Delete this client...
+    show:
+      new_project: New Project
     edit:
       there_are: "There are"
       number_of_users: "%{count} users"
-      public_site: "Your organization's public site is %{link}"
+      public_site: "Your client's public site is %{link}"
       number_of_projects: "%{count} projects"
       submit: Save changes
       saved: Changes saved
-      invalid: Invalid organization
+      invalid: Invalid client
     external_view:
       create_your_own_org: "However, you can <a href='%{link}'>create your own organization</a> for your projects."
       request_permission: "To access this organization, you must request permission to some of the administrators:"
@@ -495,28 +497,28 @@ en:
         signup_links: "Sign up yearly for <a href='%{corporate}'>Corporate ($2990)</a>, <a href='%{pro}'>Pro ($990)</a>, <a href='%{basic}'>Basic ($290)</a> or <a href='%{personal}'>Personal ($120)</a>."
     fields:
       logo: Logo <em>Ideally should be 134x36 pixels</em>
-      name: "Organization name"
-      name_placeholder: Your organization
-      permalink: Short organization code <em>No spaces allowed. Will be used for the web address.</em>
+      name: "Client name"
+      name_placeholder: Your client
+      permalink: Short client code <em>No spaces allowed. Will be used for the web address.</em>
       domain: "Domain <em>You can use your own domain for your organization, check the <a href='http://help.teambox.com/faqs/more-ways-to-access-teambox/custom-domain' title='How to use your own domain for your organization in Teambox'>documentation</a>.</em>"
       description: HTML to be displayed on the entrance page <a href="http://help.teambox.com/faqs/more-ways-to-access-teambox/customize-organizations">Learn how to use this</a>
     index:
       about:
-        title: About Organizations
+        title: About Clients
         explain1: An organization allows you to group projects and users under a brand name.
         explain2: "You can link them to your own domain to customize your Teambox space. Use your own logo and login page, and share it with your clients."
       new:
-        create: "+ Create a new Organization"
+        create: "+ Create a new Client"
         explain: "Brand it with your own logo and website, and create projects inside."
-      title: Organizations
+      title: Clients
     not_admin: "You can't access the billing page because you are not an administrator."
-    not_in_community: "The community version doesn't support multiple organizations"
+    not_in_community: "The community version doesn't support multiple clients"
     new:
-      title: New Organization
-      explain: Organize your people and projects inside an organization.
-      submit: Create Organization
-      created: Your organization has been created!
-      invalid_organization: Invalid organization, correct errors and try again.
+      title: New Client
+      explain: Organize your people and projects inside a client organization.
+      submit: Create Client
+      created: Your client has been created!
+      invalid_organization: Invalid client, correct errors and try again.
     organization:
       you_are: "You're an <strong>%{role}</strong> of this organization"
       admin: admin
@@ -527,14 +529,14 @@ en:
         other: %{count} projects
       more_users: "and %{count} more users"
     projects:
-      title: "'%{name}' organization"
+      title: "'%{name}' client"
       new_project: New project
-      instructions: "These are the projects for this organization. If you're an admin, you can transfer a project to <a href='%{organizations_link}'>other organizations</a> by opening the project's settings."
+      instructions: "These are the projects for this client. If you're an admin, you can transfer a project to <a href='%{organizations_link}'>other clientss</a> by opening the project's settings."
     active_projects:
       title: Active projects
       role: "you're an <strong>%{role}</strong>"
       settings: settings
-      no_active_projects: There are no active projects in this organization.
+      no_active_projects: There are no active projects in this client.
       dont_belong: You're not part of this project
     archived_projects:
       title: Archived projects
@@ -1150,8 +1152,8 @@ en:
       signup: Signup
       files: Files
       invitations: Invitations
-      organizations: Organizations
-      organization: Organization
+      organizations: Clients
+      organization: Client
       affiliate_area: Affiliate Area
     projects_dropdown:
       all_projects: Overview for all projects
