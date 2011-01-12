@@ -1,4 +1,4 @@
-!!! Strict
+!!! 5
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", 'xml:lang'=>"en", :lang=>"en" }
   %head
     %meta{ 'http-equiv' => "content-type", :content => "text/html;charset=utf-8" }
@@ -9,8 +9,14 @@
     %title= "#{@page_title} Teambox"
     = stylesheet_link_tag 'application', :media => :screen
     = #stylesheet_link_tag 'custom', :media => :screen
+    
     = stylesheet_link_tag 'print', :media => :print
+    
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js", :type => "text/javascript"}
+    :javascript
+      $j = jQuery.noConflict();
     = sprockets_include_tag
+    </script>
     = yield :js_includes
     - javascript_tag do
       = yield :js_templates
