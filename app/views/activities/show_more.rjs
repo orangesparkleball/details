@@ -9,4 +9,5 @@ if @activities.any?
     page << "}"
   end
   page.insert_html :after, :activities, show_more_button
+  page.call "format_posted_date"
 end

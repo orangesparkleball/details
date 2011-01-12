@@ -46,7 +46,7 @@ date_yesterday = '<%= I18n.t 'date.yesterday' %> ';
 
 document.on("dom:loaded", function() {
   format_posted_date();
-  new PeriodicalExecuter(format_posted_date, 30);
+  new PeriodicalExecuter(format_posted_date, 60);
 });
 
 document.on("ajax:success", function() {

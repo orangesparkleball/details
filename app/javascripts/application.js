@@ -6,6 +6,7 @@
 //= require <controls>
 //= require <dragdrop>
 //= require <sound>
+//= require <livequery>
 
 // Call this on any function to transform it into a function that will only be called
 // once in the given interval. Example: function().throttle(200) for 200ms.

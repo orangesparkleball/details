@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-  jQuery("time.timeago").timeago();
+  // jQuery("time.timeago").timeago();
 });
 
 
@@ -32,7 +32,7 @@ function format_posted_date() {
 
   $.extend($.timeago, {
     settings: {
-      refreshMillis: 60000,
+      refreshMillis: 0,
       allowFuture: false,
       strings: {
         prefixAgo: null,

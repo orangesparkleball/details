@@ -12,7 +12,8 @@ if @activities.any?
       page.insert_html :top, :activities, show_threaded_activity(thread)
     end
   end
-
+  
+  page.call "format_posted_date"
   page[:activities].visual_effect :highlight, :duration => 3
   
   page << reset_autorefresh
@@ -27,7 +28,7 @@ if @activities.any?
       page << fluid_growl(h(activity.project.name), h(activity.user.name), escape_javascript(body))
     end
   end
-
+  
   # unless @activities.all? { |a| a.user_id == current_user.id }
   #   page << "Sound.play('/sounds/laser.wav')"
   # end
