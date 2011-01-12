@@ -63,6 +63,7 @@ class Conversation < RoleRecord
   
   def name=(value)
     value = nil if value.blank?
+    self[:simple] = false unless value.blank?
     self[:name] = value
   end
   
