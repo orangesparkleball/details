@@ -35,6 +35,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   map.resources :organizations, :member => [:projects, :external_view, :delete] do |org|
     org.resources :memberships, :member => [:change_role, :add, :remove]
+    
+    org.show_more  'activities/:id/show_more.:format', :controller => 'activities', :action => 'show_more', :method => :get
   end
 
   map.resources :sites, :only => [:show, :new, :create]

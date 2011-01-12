@@ -8,7 +8,7 @@ defaults: &defaults
   app_domain: osbdetails.heroku.com
 
   # How many activities should activity feeds display?
-  activities_per_page: 25
+  activities_per_page: 5
   autorefresh_interval: 30 # in seconds
 
   # Hour of the day at which daily reminders will be sent
@@ -38,7 +38,7 @@ defaults: &defaults
   # Enable search (you must have thinking_sphinx installed and configured)
   # See http://wiki.github.com/teambox/teambox/configuring-search for more 
   # information on configuring search
-  allow_search: false
+  allow_search: true
 
   # Default timezone
   time_zone: UTC
