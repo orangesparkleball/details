@@ -53,7 +53,7 @@ describe Conversation do
   end
 
   it "destroy itself when the last comment is destroy if simple" do
-    conversation = Factory.build(:conversation, :simple => true)
+    conversation = Factory.build(:conversation, :name => "", :simple => true)
     conversation.save
     @comment = conversation.comments.first.destroy
     Conversation.find_by_id(@comment.target.id).should be_nil
