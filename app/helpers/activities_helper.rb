@@ -181,6 +181,8 @@ module ActivitiesHelper
       url = user_show_more_path(@user.id, options[:last_activity].id)
     elsif location_name == 'show_projects'
       url = project_show_more_path(@current_project.permalink, options[:last_activity].id)
+    elsif location_name == 'show_organizations'
+      url = organization_show_more_path(@organization.permalink, options[:last_activity].id)
     elsif location_name == 'show_more_activities' and params[:project_id]
       url = project_show_more_path(params[:project_id], options[:last_activity].id)
     elsif location_name == 'show_more_activities' and params[:user_id]

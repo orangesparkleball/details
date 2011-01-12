@@ -81,6 +81,9 @@ class ActivitiesController < ApplicationController
     def get_target
       @target = if params[:project_id]
         @current_project = @current_user.projects.find_by_permalink(params[:project_id])
+      elsif params[:organization_id]
+        @organization = Organization.find_by_permalink(params[:organization_id])
+        @organization.projects
       elsif params[:user_id]
         @user = User.find_by_id(params[:user_id])
         @user.projects_shared_with(@current_user)

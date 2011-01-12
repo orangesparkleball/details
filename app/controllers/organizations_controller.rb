@@ -10,7 +10,26 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-    redirect_to edit_organization_path(@organization)
+    # redirect_to edit_organization_path(@organization)
+    @projects = @organization.projects
+    @pending_projects = current_user.invitations.pending_projects
+    @new_conversation = Conversation.new(:simple => true)
+    @activities = Activity.for_projects(@projects)
+    @threads = @activities.threads
+    @last_activity = @threads.all.last
+    @archived_projects = @organization.projects.archived
+    @commentable_projects = @projects.select { |p| p.commentable?(current_user) and not p.archived? }
+    
+    respond_to do |f|
+      f.html
+      f.m     { redirect_to activities_path if request.path == '/' }
+      f.rss   { render :layout  => false }
+      f.xml   { render :xml     => @projects.to_xml }
+      f.json  { render :as_json => @projects.to_xml }
+      f.yaml  { render :as_yaml => @projects.to_xml }
+      f.ics   { render :text    => Project.to_ical(@projects, params[:filter] == 'mine' ? current_user : nil, request.host, request.port) }
+      f.print { render :layout  => 'print' }
+    end
   end
 
   def members
