@@ -98,18 +98,22 @@ ActionController::Routing::Routes.draw do |map|
     project.hooks 'hooks/:hook_name', :controller => 'hooks', :action => 'create', :conditions => { :method => :post }
 
     # Use routes for /project/:project_id/tasks instead of /project/:project_id/task_lists/:task_list_id/tasks
-    project.resources :tasks, :has_many => :comments, :member => { :watch => :put, :unwatch => :put, :reorder => :put }
+    project.resources :tasks, :member => { :watch => :put, :unwatch => :put, :reorder => :put } do |tasks|
+      tasks.resources :comments, :member => {:like => [:put, :delete]}
+    end
 
     project.resources :task_lists,
       :collection => { :gantt_view => :get, :archived => :get, :reorder => :put },
       :member => { :watch => :put, :unwatch => :put, :archive => :put, :unarchive => :put } do |task_lists|
         # deprecated routes, use "project.resources :tasks" directly
-        task_lists.resources :tasks, :has_many => :comments, :member => { :watch => :put, :unwatch => :put }
+        task_lists.resources :tasks, :has_many => :comments, :member => { :watch => :put, :unwatch => :put  } 
     end
 
     project.contacts 'contacts', :controller => :people, :action => :contacts, :method => :get
     project.resources :people, :member => { :destroy => :get }
-    project.resources :conversations, :has_many => [:comments], :member => { :watch => :put, :unwatch => :put }
+    project.resources :conversations, :member => { :watch => :put, :unwatch => :put} do |convo|
+      convo.resources :comments, :member => {:like => [:put, :delete]}
+    end
     project.resources :pages, :has_many => [:notes,:dividers,:task_list,:uploads], :member => { :reorder => :post }, :collection => { :resort => :post }
     
     project.search 'search', :controller => 'search'
@@ -136,16 +140,16 @@ ActionController::Routing::Routes.draw do |map|
     api.resources :projects, :except => [:new, :edit], :member => {:transfer => :put} do |project|
       project.resources :activities, :only => [:index, :show]
       project.resources :people, :except => [:create, :new, :edit]
-      project.resources :comments, :except => [:new, :create, :edit]
+      project.resources :comments, :except => [:new, :create, :edit], :member => {:like => [:put, :delete]}
       project.resources :conversations, :except => [:new, :edit], :member => {:watch => :put, :unwatch => :put} do |conversation|
-        conversation.resources :comments, :except => [:new, :edit]
+        conversation.resources :comments, :except => [:new, :edit], :member => {:like => [:put, :delete]}
       end
       project.resources :invitations, :except => [:new, :edit, :update], :member => {:resend => :put}
       project.resources :task_lists, :except => [:new, :edit], :member => {:archive => :put, :unarchive => :put} do |task_list|
         task_list.resources :tasks, :except => [:new, :edit]
       end
       project.resources :tasks, :except => [:new, :edit, :create], :member => {:watch => :put, :unwatch => :put}  do |task|
-        task.resources :comments, :except => [:new, :edit]
+        task.resources :comments, :except => [:new, :edit], :member => {:like => [:put, :delete]}
       end
       project.resources :uploads, :except => [:new, :edit, :update]
       project.resources :pages, :except => [:new, :edit], :member => {:reorder => :put}, :collection => {:resort => :put}
@@ -159,15 +163,15 @@ ActionController::Routing::Routes.draw do |map|
     
     
     api.resources :tasks, :except => [:new, :edit, :create], :member => {:watch => :put, :unwatch => :put}
-    api.resources :comments, :except => [:new, :create, :edit]
+    api.resources :comments, :except => [:new, :create, :edit], :member => {:like => [:put, :delete]}
     api.resources :conversations, :except => [:new, :edit], :member => {:watch => :put, :unwatch => :put} do |conversation|
-      conversation.resources :comments, :except => [:new, :edit]
+      conversation.resources :comments, :except => [:new, :edit], :member => {:like => [:put, :delete]}
     end
     api.resources :task_lists, :except => [:new, :edit], :member => {:archive => :put, :unarchive => :put} do |task_list|
       task_list.resources :tasks, :except => [:new, :edit]
     end
     api.resources :tasks, :except => [:new, :edit, :create], :member => {:watch => :put, :unwatch => :put}  do |task|
-      task.resources :comments, :except => [:new, :edit]
+      task.resources :comments, :except => [:new, :edit], :member => {:like => [:put, :delete]}
     end
     api.resources :uploads, :except => [:new, :edit, :update]
     api.resources :pages, :except => [:new, :edit], :member => {:reorder => :put}, :collection => {:resort => :put}

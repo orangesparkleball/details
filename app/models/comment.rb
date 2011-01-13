@@ -12,6 +12,9 @@ class Comment < ActiveRecord::Base
   belongs_to :assigned, :class_name => 'Person', :with_deleted => true
   belongs_to :previous_assigned, :class_name => 'Person', :with_deleted => true
   
+  has_many :likes, :dependent => :destroy
+  has_many :like_users, :through => :likes, :source => :user
+  
   def task_comment?
     self.target_type == "Task"
   end

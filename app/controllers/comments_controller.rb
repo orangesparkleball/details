@@ -53,6 +53,34 @@ class CommentsController < ApplicationController
     end
   end
   
+  
+  def like
+    authorize! :comment, target, @current_project
+    if request.put?
+      @comment.like_users << current_user unless @comment.like_users.include?(current_user)
+      respond_to do |wants|
+        wants.html {
+          if request.xhr? or iframe?
+            render :partial => 'comment', :locals => { :comment => @comment, :threaded => true }
+          else
+            redirect_to [target.project, target]
+          end
+        }
+      end
+    elsif request.delete?
+      @comment.like_users.delete(current_user) if @comment.like_users.include?(current_user)
+      respond_to do |wants|
+        wants.html {
+          if request.xhr? or iframe?
+            render :partial => 'comment', :locals => { :comment => @comment, :threaded => true }
+          else
+            redirect_to [target.project, target]
+          end
+        }
+      end
+    end
+  end
+  
   def destroy
     authorize! :destroy, @comment
     @comment.destroy
