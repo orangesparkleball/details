@@ -963,6 +963,8 @@ en:
       confirm_delete: Are you sure you want to leave this project?
       leave_project: Leave project
   comments:
+    like: Like
+    unlike: Unlike?
     fields:
       attach: Attach
     attach:

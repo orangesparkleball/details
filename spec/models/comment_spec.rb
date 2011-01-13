@@ -212,6 +212,9 @@ describe Comment do
     before do
       @project = Factory(:project)
       @user = @project.user
+      @bob = Factory(:confirmed_user, :login => "bob")
+      @bill = Factory(:confirmed_user, :login => "bill")
+      @suzie = Factory(:confirmed_user, :login => "suzie")
     end
     
     it "should allow users to like" do
@@ -230,6 +233,18 @@ describe Comment do
       }.should raise_error
     end
     
+    it "should build an appropriate string of names for likes" do
+      comment = Factory(:comment, :project => @project, :user => @user, :target => @project)
+      comment.like_users << @bob
+      comment.build_like_string(@user).should == "@bob likes this."
+      comment.build_like_string(@bob).should == "You like this."
+      comment.like_users << @bill
+      comment.build_like_string(@user).should == "@bill and @bob like this."
+      comment.build_like_string(@bob).should == "You and @bill like this."
+      comment.like_users << @suzie
+      comment.build_like_string(@user).should == "@bill, @bob and @suzie like this."
+      comment.build_like_string(@bob).should == "You, @bill and @suzie like this."
+    end
   end
   
   describe "commenting updates the updated_at field" do

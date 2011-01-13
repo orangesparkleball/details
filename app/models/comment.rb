@@ -48,6 +48,30 @@ class Comment < ActiveRecord::Base
   def hours?
     hours and hours > 0
   end
+  
+  def build_like_string(current_user)
+    return "" if(like_users == 0) 
+    names = like_users.collect{|u| u.id == current_user.id ? nil : "@#{u.login}" }.compact.sort
+    if like_users.include?(current_user)
+      case names.size
+      when 0
+        "You like this."
+      when 1
+        "You and #{names.join('')} like this."
+      else
+        last = names.pop
+        "You, #{names.join(', ')} and #{last} like this."
+      end
+    else
+      case names.size
+      when 1
+        "#{names.join('')} likes this."
+      else
+        last = names.pop
+        "#{names.join(', ')} and #{last} like this."
+      end
+    end
+  end
 
   named_scope :with_hours, :conditions => 'hours > 0'
 

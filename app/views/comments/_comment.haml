@@ -52,4 +52,13 @@
         - else
           .upload_list
             = list_uploads_inline(comment.uploads)
-    .clear
+    .clear    
+    - case comment.target
+    - when Conversation
+      .likes
+        - if comment.like_users.length > 0
+          = comment.build_like_string(current_user)
+        - if comment.like_users.include? current_user
+          = button_to t('comments.unlike'), like_project_conversation_comment_path(comment.project, comment.target, comment), :method => :delete, :class => 'submit-link'
+        - else
+          = button_to t('comments.like'), like_project_conversation_comment_path(comment.project, comment.target, comment), :method => :put, :class => 'submit-link'

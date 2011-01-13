@@ -1,3 +1,4 @@
+//= require <likes>
 var iframeCounter = 0
 
 Element.addMethods('form', {
