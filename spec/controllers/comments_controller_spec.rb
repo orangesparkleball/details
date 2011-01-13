@@ -22,4 +22,19 @@ describe CommentsController do
       Comment.last.user.should == @user
     end
   end
+  
+  describe "#like" do
+    it "should set the current user as the liker" do      
+      @jordi = Factory.create(:confirmed_user, :login => 'jordi')
+      conversation = Factory(:conversation, :user => @jordi, :project => @project)
+      Comment.last.user.should == @jordi
+      comment = Comment.last
+      login_as @user
+      xhr :post, :like,
+           :project_id => @project.permalink,
+           :conversation_id => conversation.id,
+           :comment_id => comment.id
+      Comment.last.like_users.should == [@user]
+    end
+  end
 end

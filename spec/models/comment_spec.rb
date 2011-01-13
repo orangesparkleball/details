@@ -208,6 +208,30 @@ describe Comment do
     end
   end
   
+  describe "liking" do
+    before do
+      @project = Factory(:project)
+      @user = @project.user
+    end
+    
+    it "should allow users to like" do
+      comment = Factory(:comment, :project => @project, :user => @user, :target => @project)
+      comment.like_users << @user
+      pablo = Factory(:confirmed_user, :login => "pablo")
+      comment.like_users << pablo
+      comment.like_users.size.should == 2
+    end
+    
+    it "should not allow a user to like the same comment twice" do      
+      comment = Factory(:comment, :project => @project, :user => @user, :target => @project)
+      lambda {
+        comment.like_users << @user
+        comment.like_users << @user
+      }.should raise_error
+    end
+    
+  end
+  
   describe "commenting updates the updated_at field" do
     before do
       @project = Factory(:project)
