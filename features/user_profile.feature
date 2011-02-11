@@ -37,6 +37,8 @@ Feature: Showing users
     And I should see "Ruby Rockstars" within "#content"
     And I should not see "Genius" within "#content"
 
+  # TODO:
+  # Fix this - we want to allow threaded conversations so it acts more like a wall.
   Scenario: We should only see activities belonging to the user
     Given "pablo" is in the project called "Ruby Rockstars"
     Given I go to the profile of "pablo"

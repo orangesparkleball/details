@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :teambox_datas
 
+  has_many :likes
+  has_many :liked_comments, :through => :users, :source => :comment
   has_many :organizations, :through => :memberships
   has_many :admin_organizations, :through => :memberships, :source => :organization, :conditions => {'memberships.role' => Membership::ROLES[:admin]}
 

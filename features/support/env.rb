@@ -25,10 +25,11 @@ require 'cucumber/rails/capybara_javascript_emulation'
 Capybara::Driver::Selenium.class_eval do
   class << self
     alias old_driver driver
-    if false
-      # override firefox driver in favor of selenium
+    if true
+      # true firefox driver in favor of selenium
       def driver
         @driver ||= begin
+          # Selenium::WebDriver::Chrome.path = "/Applications/Web/Google Chrome.app/Contents/MacOS/Google Chrome"
           driver = Selenium::WebDriver.for :chrome
           at_exit { driver.quit }
           driver

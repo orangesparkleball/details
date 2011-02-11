@@ -1,5 +1,7 @@
-# Teambox
-## Collaboration just got better
+# Details
+## Collaboration just got _even_ better
+
+Details is a customized version of Teambox built by Orange Sparkle Ball.
 
 [Teambox is project management software][teambox] built on Ruby on Rails with a focus on collaboration.
 
